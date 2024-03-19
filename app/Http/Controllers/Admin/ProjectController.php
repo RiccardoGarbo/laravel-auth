@@ -13,7 +13,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-       return view('admin.projects.index');
+        $projects = Project::orderByDesc('updated_at')->orderByDesc('created_at')->get();
+       return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -35,9 +36,10 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(Project $Project) {
+    
+     return view('admin.projects.show', compact('project'));
+    
     }
 
     /**
