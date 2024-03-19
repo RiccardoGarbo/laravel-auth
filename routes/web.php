@@ -1,6 +1,6 @@
 <?php
-use App\Http\Controllers\HomeController as AdminHomeController;
-use App\Http\Controllers\HomeController as GuestHomeController; 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Guest\HomeController as GuestHomeController; 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
