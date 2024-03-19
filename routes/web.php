@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', GuestHomeController::class)->name('guest.home');
 
-Route::prefix('/admin')->name('admin.')->Route::middleware('auth')->group(function () {
+Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     //Rotte Admin Home
-    Route::get('/', AdminHomeController::class)->middleware(['auth', 'verified'])->name('admin.home');
+    Route::get('', AdminHomeController::class)->middleware(['auth', 'verified'])->name('admin.home');
     //Rotte Project
     Route::resource('project', ProjectController::class);
     
