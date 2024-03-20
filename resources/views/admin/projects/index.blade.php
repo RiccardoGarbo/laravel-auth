@@ -35,7 +35,7 @@
             <div class="d-flex gap-2"> 
               <a href="{{route('admin.projects.show' , $project)}}" class="btn btn-primary">Details</a>
               <a class="btn btn-warning" href="{{route('admin.projects.edit', $project)}}">Edit</a>
-              <form action="{{route('admin.projects.destroy', $project)}}" method="POST">
+              <form id="delete-form" action="{{route('admin.projects.destroy', $project)}}" method="POST">
                   @csrf
                   @method('DELETE')
                   <input class="btn btn-danger" type="submit" value="Delete">
@@ -49,5 +49,22 @@
         
 
 </main>
+
+@endsection
+@section('scripts')
+<script>
+
+const deleteForm = document.getElementById('delete-form');
+deleteForm.addEventListener('submit', e => {
+e.preventDefault();
+
+const confirmation = confirm('Vuoi eliminare questo progetto?');
+if(confirmation ) deleteForm.submit();
+
+
+});
+
+
+</script>
 
 @endsection
