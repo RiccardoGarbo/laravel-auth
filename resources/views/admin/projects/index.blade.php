@@ -5,8 +5,11 @@
 
 @section('content')
 
-<header>
+<header class="container">
+    <div class="d-flex justify-content-between align-items-center">
     <h1 class="text-center">Projects</h1>
+    <a class="btn btn-success text-align-center" href="{{route('admin.projects.create')}}">Create new project!</a>
+</div>
 </header>
 <main class="container">
 
@@ -31,11 +34,7 @@
             <td>
             <div class="d-flex gap-2"> 
               <a href="{{route('admin.projects.show' , $project)}}" class="btn btn-primary">Details</a>
-              <form action="{{route('admin.projects.destroy', $project)}}" method="POST">
-              @csrf
-              @method('PATCH')
-              <input class="btn btn-warning" type="submit" value="Edit">
-              </form>
+              <a class="btn btn-warning" href="{{route('admin.projects.edit', $project)}}">Edit</a>
               <form action="{{route('admin.projects.destroy', $project)}}" method="POST">
                   @csrf
                   @method('DELETE')
