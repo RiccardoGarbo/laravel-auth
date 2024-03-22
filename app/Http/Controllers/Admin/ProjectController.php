@@ -37,11 +37,11 @@ class ProjectController extends Controller
 
         $data = $request->all();
         $newProject = new Project();
-        $newProject->fill($data);
         if (Arr::exists($data, 'image')) {
             $img_url = Storage::putFile('project_images', $data['image']);
             $newProject->image = $img_url;
         }
+        $newProject->fill($data);
         $newProject->save();
         return to_route('admin.projects.index', $newProject);
     }
