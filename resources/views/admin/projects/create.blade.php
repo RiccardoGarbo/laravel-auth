@@ -4,7 +4,7 @@
 <div class="container">
 <h1 class="text-center">Create a new project!</h1>
 
-<form action="{{route('admin.projects.store')}}" method="POST">
+<form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label for="title" class="form-label">Title project</label>
@@ -18,7 +18,7 @@
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Image project</label>
-      <input type="text" name="image"  class="form-control">
+      <input type="file" name="image"  class="form-control">
       <div  class="form-text">Add image for new project.</div>
     </div>
 

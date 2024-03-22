@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
@@ -16,10 +17,11 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
+        Storage::makeDirectory('project_images');
         return [
-            'title' =>fake()->text(20),
-            'content' =>fake()->paragraphs(15,true),
-            'image' =>fake()->imageUrl(300,300,true)
+            'title' => fake()->text(20),
+            'content' => fake()->paragraphs(3, true),
+            'image' => Storage::putFile(fake()->image(storage_path('app/public/project_images'), null, 300, 300))
         ];
     }
 }

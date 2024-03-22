@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
+
+
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::orderByDesc('updated_at')->orderByDesc('created_at')->get();
-       return view('admin.projects.index', compact('projects'));
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -30,9 +34,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->all();
         $newProject = new Project();
         $newProject->fill($data);
+        if (Arr::exists($data, 'image')) {
+            $img_url = Storage::putFile('project_images', $data['image']);
+            $newProject->image = $img_url;
+        }
         $newProject->save();
         return to_route('admin.projects.index', $newProject);
     }
@@ -40,10 +49,10 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project) {
-    
-     return view('admin.projects.show', compact('project'));
-    
+    public function show(Project $project)
+    {
+
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
