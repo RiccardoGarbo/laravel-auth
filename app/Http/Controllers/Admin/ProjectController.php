@@ -33,7 +33,14 @@ class ProjectController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+
     {
+
+        $request->validate([
+
+            /*'title' => 'required|string|min:5|max:40|unique:projects',
+            'content' => 'required|string',
+            'image' => 'required|image'*/]);
 
         $data = $request->all();
         $newProject = new Project();
@@ -69,6 +76,11 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $request->all();
+        if (Arr::exists($data, 'image')) {
+            if ($project->image) Storage::delete($project->image);
+            $img_url = Storage::putFile('project_images', $data['image']);
+            $project->image = $img_url;
+        }
         $project->update($data);
         return to_route('admin.projects.show', $project);
     }
@@ -79,6 +91,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
 
     {
+        if ($project->image) Storage::delete($project->image);
         $project->delete();
         return to_route('admin.projects.index');
     }
