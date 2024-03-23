@@ -21,7 +21,7 @@ class ProjectFactory extends Factory
         return [
             'title' => fake()->text(20),
             'content' => fake()->paragraphs(3, true),
-            'image' => Storage::putFile('project_images', fake()->image(storage_path('app/public/project_images'), 300, 300))
+            'image' => Storage::putFile('project_images', fake()->image(null, 300, 300))
         ];
     }
 }
